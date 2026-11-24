@@ -1,0 +1,77 @@
+@import 'base-wp/head-wp';
+
+// devices viewport width starts at:
+$breakpoints: (
+  xs-phone: 360px,
+  phone: 576px,
+  tablet: 1024px,
+  desktop: 1366px,
+  widescreen: 1920px,
+  '4k': 2560px,
+);
+
+// keywords
+$media-expressions: (
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x': '(-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi)',
+  'retina3x': '(-webkit-min-device-pixel-ratio: 2.5), (min-resolution: 240dpi)'
+);
+
+// ligatured operators ≥ ≤
+
+// 1. Configuration and helpers
+@import 'abstracts/functions';
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// 2. Vendors: include media mixins and mormalize imported from node_modules
+@import 'vendors/normalize';
+@import 'vendors/fancybox';
+@import 'vendors/swiper';
+@import 'vendors/simple-bar';
+@import 'vendors/aos';
+@import '~include-media/dist/include-media';
+
+// 3. Base styles and elements
+@import 'base/base';
+@import 'base/helpers';
+@import 'base/fonts';
+@import 'base/typography';
+@import 'base/forms';
+@import 'base/web_accessibility';
+
+// base WP
+// @import 'base-wp/cms-reset';
+// @import 'base-wp/wp-reset';
+
+// 4. Layout-related sections
+@import 'layout/header';
+@import 'layout/common';
+@import 'layout/footer';
+
+// 5. Components
+@import 'components/button';
+@import 'components/photo-block';
+@import 'components/section-content-block';
+@import 'components/accordion';
+@import 'components/section-hero-home';
+@import 'components/section-grid-block';
+@import 'components/section-services-block';
+@import 'components/section-slider';
+@import 'components/popup';
+@import 'components/section-background-block';
+@import 'components/section-blog-page';
+@import 'components/pagination';
+@import 'components/section-posts';
+@import 'components/section-logos-block';
+@import 'components/section-stats';
+
+// 6. Page-specific styles
+// @import 'pages/home';
+
+// 7. Themes
+// @import 'themes/themes';

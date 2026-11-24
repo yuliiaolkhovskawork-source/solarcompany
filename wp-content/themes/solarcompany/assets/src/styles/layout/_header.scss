@@ -1,0 +1,1132 @@
+// closed state of mega menu content, revealed with stagger on open
+@mixin bloom-item {
+  opacity: 0;
+  transform: translateY(rem-calc(16));
+  filter: blur(6px);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out, filter 0.45s ease-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    filter: none;
+  }
+}
+
+html {
+  &:has(body.nav-active) {
+    overflow: hidden;
+  }
+}
+
+.nav-active {
+  // clip, not hidden: hidden makes body a scroll container and breaks the sticky header
+
+  @include media('<desktop') {
+    overflow: clip;
+  }
+
+  // [id] beats the headroom--unpinned transform: the fixed .nav would move up with the panel
+  [id="header"] .header-panel {
+    transform: none;
+    will-change: auto;
+
+    @include media('<desktop') {
+      background: $white;
+    }
+  }
+}
+
+
+.nav-opener {
+  @include size(rem-calc(35));
+  background: $blue;
+  border: 0;
+  border-radius: rem-calc(8);
+  cursor: pointer;
+  @include animate(background);
+  position: relative;
+  z-index: 5;
+  font-size: 0;
+  line-height: 0;
+
+  @include media('<desktop') {
+    @include size(rem-calc(40.25));
+    border-radius: rem-calc(9.2);
+  }
+
+  @include media('>=desktop') {
+    display: none;
+  }
+
+  &:before,
+  &:after,
+  span {
+    @include animate(transform opacity left right background);
+    background: $white;
+    position: absolute;
+    top: 50%;
+    left: rem-calc(7);
+    right: rem-calc(7);
+    height: 1px;
+    transform: translateY(-50%);
+
+    @include media('<tablet') {
+      left: rem-calc(8.05);
+      right: rem-calc(8.05);
+    }
+  }
+
+  &:before,
+  &:after {
+    content: '';
+  }
+
+  &:before {
+    transform: translateY(rem-calc(-6));
+
+    @include media('<tablet') {
+      transform: translateY(rem-calc(-6.9));
+    }
+  }
+
+  &:after {
+    transform: translateY(rem-calc(5));
+
+    @include media('<tablet') {
+      transform: translateY(rem-calc(5.75));
+    }
+  }
+
+
+  &:hover {
+    background: $yellow;
+  }
+
+  .nav-active & {
+    span {
+      opacity: 0;
+      transform: rotate(45deg);
+    }
+
+    &:before,
+    &:after {
+      left: rem-calc(5);
+      right: rem-calc(5);
+      background: $white;
+
+      @include media('<tablet') {
+        left: rem-calc(5.75);
+        right: rem-calc(5.75);
+      }
+    }
+
+    &:before {
+      transform: rotate(45deg) translateY(0);
+    }
+
+    &:after {
+      transform: rotate(-45deg) translateY(0);
+    }
+  }
+}
+
+[id="header"] {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 102;
+
+  &.headroom--not-top {
+    position: sticky;
+    pointer-events: none;
+    top: 0;
+
+    // keep header height constant across states (a height change triggers scroll anchoring
+    // and makes headroom flip top/not-top on slow scroll); hide the panel top padding instead
+    @include media('>=desktop') {
+      top: rem-calc(-23);
+    }
+
+    // .admin-bar & {
+    //   top: rem-calc(30);
+    // }
+  }
+
+  .card-drop-opener {
+    pointer-events: none;
+  }
+
+  .header-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: rem-calc(10);
+    border-radius: rem-calc(16);
+
+    @include media('>=desktop') {
+      // mega drop is positioned against the full-width .header-panel
+      position: static;
+      gap: rem-calc(62);
+      @include animate(padding);
+      border-radius: rem-calc(16);
+    }
+  }
+
+  .holder-block {
+    display: flex;
+    flex-direction: column;
+    gap: rem-calc(13);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: rem-calc(17);
+
+    @include media('>=desktop') {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      padding: 0;
+      height: auto;
+      overflow: visible;
+    }
+
+    >.item-drop-panel {
+      @include media('>=desktop') {
+        display: none;
+      }
+    }
+  }
+
+  .logo {
+    display: block;
+    width: rem-calc(103.5);
+    position: relative;
+    z-index: 10;
+
+    @include media('>=tablet') {
+      width: rem-calc(160);
+    }
+
+    @include media('>=desktop') {
+      width: rem-calc(244.95);
+    }
+
+    img {
+      grid-area: 1 / 1;
+      height: auto;
+      @include animate(opacity);
+      width: 100%;
+    }
+
+    a {
+      padding: 0;
+      display: grid;
+
+      &:hover {
+        border: 0;
+      }
+    }
+
+    .logo-light {
+      opacity: 0;
+    }
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: rem-calc(10);
+
+    @include media('>=desktop') {
+      flex-direction: row;
+      gap: rem-calc(11.5);
+    }
+
+    .btn {
+      @include media('>=desktop') {
+        font-size: rem-calc(24.15);
+        padding: rem-calc(25.3 17.25);
+        min-width: rem-calc(190.9);
+        border-radius: rem-calc(18.4);
+      }
+    }
+
+    .btn-outline {
+      @include media('>=desktop') {
+        padding: rem-calc(23 17.25);
+        min-width: rem-calc(123.05);
+      }
+
+      @include media('<desktop') {
+        color: $white;
+        border-color: $white;
+        font-size: rem-calc(12);
+        width: rem-calc(92);
+        min-width: auto;
+        padding: rem-calc(11);
+        border-radius: rem-calc(8);
+
+        &:hover {
+          background: $white;
+          color: $blue;
+        }
+      }
+
+      @include media('<tablet') {
+        font-size: rem-calc(13.8);
+        width: rem-calc(105.8);
+        padding: rem-calc(12.65);
+        border-radius: rem-calc(9.2);
+      }
+    }
+  }
+
+  // first section is a hero with image: header sits over it
+  body:has(.main :first-child.hero-section:not(.no-hero-image)) &:not(.headroom--not-top) {
+    .btn-outline {
+      border-color: $white;
+      color: $white;
+
+      &:hover {
+        color: $blue;
+        background: $white;
+      }
+    }
+  }
+
+  .btn {
+    &.show-on-desktop {
+      display: none;
+
+      @include media('>=desktop') {
+        display: inline-flex;
+      }
+    }
+
+    &.show-on-mobile {
+      margin: 0 0 0 auto;
+      border-radius: rem-calc(8);
+      position: relative;
+      z-index: 5;
+
+      @include media('<desktop') {
+        font-size: rem-calc(13.8);
+        min-width: rem-calc(105.8);
+        padding: rem-calc(12.65);
+        border-radius: rem-calc(9.2);
+      }
+
+      @include media('>=desktop') {
+        display: none;
+      }
+    }
+  }
+
+  .menu-main-container {
+
+    @include media('>=desktop') {
+      margin: 0 auto;
+      background: $blue;
+      border-radius: rem-calc(18.4);
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .search-block {
+    position: relative;
+
+    @include media('>=desktop') {
+      margin: rem-calc(0 20);
+    }
+
+    label {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+    }
+
+    input[type="search"] {
+      border-radius: rem-calc(8);
+      border: 0;
+      height: rem-calc(40);
+      color: $blue-dark;
+      font-size: rem-calc(16);
+      width: 100%;
+      padding: rem-calc(10);
+
+      @include placeholder {
+        color: $blue-dark;
+      }
+    }
+
+    .search-slider {
+      display: none;
+      z-index: 5;
+      padding: rem-calc(10 0);
+      width: 100%;
+
+      @include media('>=desktop') {
+        padding: rem-calc(10);
+        position: absolute;
+        top: 100%;
+        right: rem-calc(-20);
+        background: $blue;
+        border-radius: rem-calc(0 0 16 16);
+        width: rem-calc(300);
+      }
+    }
+
+    .search-opener {
+      @include animate(background);
+      background: none;
+      border-radius: rem-calc(12);
+      border: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: rem-calc(10);
+
+      &:hover {
+        background: $white;
+
+        svg {
+          path {
+            fill: $blue;
+          }
+        }
+      }
+
+      svg {
+        width: rem-calc(42);
+        height: rem-calc(42);
+
+        @include media('>=desktop') {
+          width: rem-calc(24);
+          height: rem-calc(24);
+        }
+
+        path {
+          @include animate(fill);
+        }
+      }
+    }
+  }
+}
+
+.menu-item-has-children {
+
+  &:hover,
+  &.item-focused {
+    .item-drop {
+      @include media('>=desktop') {
+        // above a sibling drop that is still closing
+        z-index: 1;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.1s ease-out, visibility 0s;
+      }
+    }
+
+    .item-drop-list li,
+    .item-drop-panel {
+      @include media('>=desktop') {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
+
+    .item-drop-list li {
+      @include media('>=desktop') {
+        @for $i from 1 through 8 {
+          &:nth-child(#{$i}) {
+            transition-delay: 0.12s + $i * 0.05s;
+          }
+        }
+      }
+    }
+
+    .item-drop-panel {
+      @include media('>=desktop') {
+        transition-delay: 0.3s;
+      }
+    }
+  }
+
+  &.acc-active {
+    .acc-opener-js {
+      @include media('<desktop') {
+        font-weight: 600;
+        // color: $orange;
+      }
+    }
+  }
+
+  .item-drop-panel {
+    @include media('<desktop') {
+      display: none;
+    }
+  }
+}
+
+.header-panel {
+  position: relative;
+  will-change: transform;
+  transition: transform 0.35s ease, background 0.35s ease;
+  padding: rem-calc(7 0);
+
+  @include media('>=desktop') {
+    padding: rem-calc(23 0 0);
+  }
+
+  [id="header"].headroom--not-top & {
+    pointer-events: auto;
+    background: $white;
+    box-shadow: 0 0 .625rem rgba($black, .25);
+
+    .nav-active & {
+      @include media('<desktop') {
+        box-shadow: none;
+      }
+    }
+  }
+
+  [id="header"].headroom--unpinned.headroom--not-top & {
+    transform: translateY(-152%);
+    overflow: hidden;
+  }
+
+  [id="header"].no-animate & {
+    transition: none;
+  }
+
+  // bloom layer: rounded rect grows from .menu-main-container over header and drop (geometry set in megaMenuBloom.js)
+  @include media('>=desktop') {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      height: var(--bloom-h, 100%);
+      background: $blue;
+      pointer-events: none;
+      opacity: 0;
+      clip-path: inset(var(--bloom-top, 0) var(--bloom-right, 0) var(--bloom-bottom, 0) var(--bloom-left, 0) round rem-calc(16));
+      // hide only after it has shrunk back into the menu
+      transition: clip-path 0.4s cubic-bezier(0.5, 0, 0.75, 0), height 0.3s ease, opacity 0s linear 0.4s;
+    }
+
+    &.mega-reset:before {
+      transition: none;
+    }
+  }
+
+  // mega menu open: light logo, light outline button
+  &.mega-open {
+    @include media('>=desktop') {
+      box-shadow: none;
+
+      &:before {
+        opacity: 1;
+        clip-path: inset(0 0 0 0 round 0);
+        transition: clip-path 0.6s cubic-bezier(0.45, 0, 0.2, 1), height 0.3s ease, opacity 0s;
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
+
+      .logo {
+        img {
+          transition-delay: 0.25s;
+        }
+
+        .logo-light {
+          opacity: 1;
+        }
+
+        .logo-default {
+          opacity: 0;
+        }
+      }
+
+      .btn-outline {
+        color: $white;
+        border-color: $white;
+        transition-delay: 0.15s;
+
+        &:hover {
+          color: $blue;
+          background: $white;
+          transition-delay: 0s;
+        }
+      }
+    }
+  }
+}
+
+body {
+  &:has(#wpadminbar) {
+    .nav {
+      padding: rem-calc(108 8 8);
+
+      @include media('>=tablet') {
+        padding: rem-calc(140 8 8);
+      }
+
+      @include media('>=desktop') {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  width: 100%;
+  background: $white;
+  padding: rem-calc(73 8 25);
+  transform: translateX(100%);
+  @include animate(transform);
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  // height: calc(100vh - rem-calc(30));
+
+  @include media('>=tablet') {
+    padding: rem-calc(110 8 25);
+  }
+
+  @include media('>=desktop') {
+    position: static;
+    z-index: auto;
+    width: auto;
+    max-width: none;
+    background: none;
+    padding: 0;
+    transform: none;
+    flex-grow: 1;
+    display: block;
+    height: auto;
+  }
+
+  .nav-active & {
+    transform: translateX(0);
+  }
+
+  .nav-holder {
+    @include media('<desktop') {
+      background: $blue;
+      border-radius: rem-calc(16);
+      height: 100%;
+    }
+  }
+
+  .headroom--not-top & {
+
+    @include media('<tablet') {
+      padding: rem-calc(73 20 25);
+    }
+
+    @include media('<desktop') {
+      top: 0;
+      padding: rem-calc(120 20 25);
+      z-index: -1;
+    }
+  }
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: rem-calc(15);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-transform: capitalize;
+  margin: rem-calc(0 0 16);
+
+  @include media('>=desktop') {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+    gap: rem-calc(27.6) 0;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  >li {
+    @include media('<desktop') {
+      width: 100%;
+    }
+
+    @include media('>=desktop') {
+      @include animate(padding);
+      display: flex;
+      align-items: center;
+      padding: rem-calc(6.9 4.6);
+    }
+
+    &.active {
+      >a {
+        border: 0;
+
+        @include media('>=desktop') {
+          background: $white;
+        }
+
+        &:after {
+          @include media('<desktop') {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+
+        &:before {
+          opacity: 1;
+
+          @include media('>=desktop') {
+            font-weight: 700;
+          }
+        }
+
+        .link-text {
+          opacity: 0;
+        }
+      }
+    }
+
+    // keep the link in hover state while the pointer is inside its open drop
+    &.menu-item-has-children.item-focused,
+    &.menu-item-has-children:hover {
+      >a {
+        @include media('>=desktop') {
+          background: $white;
+
+          &:before {
+            opacity: 1;
+            font-weight: 700;
+          }
+
+          .link-text {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    >a {
+      @include animate(background);
+      color: $white;
+      font-size: rem-calc(52);
+      line-height: 1;
+      text-decoration: none;
+      position: relative;
+      border-radius: rem-calc(8);
+      font-weight: 500;
+      font-family: $manrope-font-sans-serif;
+
+      @include media('<desktop') {
+        display: block;
+        z-index: 0;
+      }
+
+      @include media('>=desktop') {
+        font-size: rem-calc(24.15);
+        padding: rem-calc(18.4 23);
+        border-radius: rem-calc(13.8);
+      }
+
+      &:after {
+
+        @include media('<desktop') {
+          content: '';
+          position: absolute;
+          inset: rem-calc(-10);
+          background: $white;
+          border-radius: rem-calc(8);
+          z-index: -1;
+          opacity: 0;
+          visibility: hidden;
+          @include animate(opacity visibility);
+        }
+      }
+
+      &:before {
+        transition: 0.2s opacity linear, 0.2s font-weight linear;
+        content: attr(data-text);
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        white-space: nowrap;
+        color: $blue;
+
+        @include media('>=desktop') {
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .link-text {
+        transition: 0.2s opacity linear;
+      }
+
+      &:hover {
+        border: 0;
+
+        @include media('>=desktop') {
+          background: $white;
+        }
+
+        &:after {
+          @include media('<desktop') {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+
+        &:before {
+          opacity: 1;
+
+          @include media('>=desktop') {
+            font-weight: 700;
+          }
+        }
+
+        .link-text {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  .arrow {
+    @include animate (transform width);
+    transform: scale(0);
+    position: relative;
+    display: none;
+    flex-shrink: 0;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12.53 6.97'%3E%3Cpath fill='%23ff681a' d='M12.53.71 11.82 0 6.27 5.56.71 0 0 .71l6.27 6.26L12.53.71Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 0;
+    height: rem-calc(10);
+
+    @include media('>=desktop') {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: rem-calc(4);
+    }
+
+    &:focus-visible,
+    &:focus {
+      transform: scale(1);
+      box-shadow: none;
+      width: rem-calc(16);
+    }
+  }
+
+  .item-drop {
+    padding: rem-calc(35 0 0);
+
+    @include media('<desktop') {
+      &.js-acc-hidden {
+        display: none;
+      }
+    }
+
+    @include media('>=desktop') {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      left: 0;
+      z-index: 0;
+      min-width: rem-calc(600);
+      padding: rem-calc(40) 0;
+      margin: 0;
+
+      @include media('>=desktop') {
+        padding: rem-calc(35 0 30);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.15s ease-in, visibility 0s 0.15s;
+
+        // keeps the item hovered while the pointer crosses the gap under the menu (sizes set in megaMenuBloom.js)
+        &:before {
+          content: '';
+          position: absolute;
+          bottom: 100%;
+          left: var(--bridge-left, 0);
+          width: var(--bridge-width, 100%);
+          height: var(--bridge-height, 0);
+        }
+      }
+
+      .item-focused>& {
+        display: block;
+      }
+    }
+
+    .container {
+      @include media('<desktop') {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      @include media('>=desktop') {
+        display: grid;
+        grid-template-columns: 1fr rem-calc(695);
+        gap: rem-calc(20);
+      }
+    }
+  }
+
+  .item-drop-list {
+    color: $white;
+
+    ul {
+      // display: flex;
+      // flex-direction: column;
+      gap: rem-calc(23);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: rem-calc(24);
+
+      @include media('>=desktop') {
+        // masonry: 1px rows, megaMenuMasonry.js sets grid-row-end span per item
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1px;
+        // dense + fixed column per item: each item takes the first free row of its column
+        grid-auto-flow: dense;
+        gap: 0 rem-calc(16);
+        align-items: start;
+        font-size: rem-calc(22);
+      }
+    }
+
+    li {
+      margin: rem-calc(0 0 20);
+
+      @include media('>=desktop') {
+        margin: 0;
+        max-width: rem-calc(270);
+
+        @for $i from 1 through 3 {
+          &:nth-child(3n + #{$i}) {
+            grid-column: $i;
+          }
+        }
+
+        @include bloom-item;
+      }
+
+      &.active {
+        >a {
+          color: $yellow;
+        }
+      }
+
+      &.active {
+        a {
+
+          @include media('>=desktop') {
+            // color: $orange;
+          }
+
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+      position: relative;
+      color: $white;
+      padding: 0;
+      font-family: $manrope-font-sans-serif;
+      font-weight: 600;
+      font-size: rem-calc(24);
+      display: inline-block;
+      margin: rem-calc(0 0 4);
+
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        // background: $white;
+        height: rem-calc(2);
+        opacity: 0;
+        @include animate(opacity);
+
+        @include media('>=desktop') {
+          // background: $orange;
+        }
+      }
+
+      &:hover {
+        // color: $white;
+        text-decoration: underline;
+        border: 0;
+        color: $yellow;
+        text-decoration: none;
+      }
+
+      .icon {
+        @include animate(background);
+        background: $blue;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: rem-calc(6);
+        width: rem-calc(30);
+        height: rem-calc(30);
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: rem-calc(16);
+      line-height: calc(24/16);
+      text-transform: none;
+    }
+  }
+}
+
+.item-drop-mega {
+  @include media('>=desktop') {
+    .item-focused>& {
+      display: grid;
+    }
+  }
+}
+
+.item-drop-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: rem-calc(16);
+  color: $light;
+  font-size: rem-calc(16);
+  padding: rem-calc(24 10 6 10);
+  display: flex;
+  min-height: rem-calc(207);
+  z-index: 1;
+  margin: auto 0 0;
+
+  @include media('>=desktop') {
+    min-height: rem-calc(335);
+    padding: rem-calc(24 28);
+    @include bloom-item;
+    margin: 0;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($black, 0.78);
+    z-index: -1;
+  }
+
+  .btn {
+    min-width: rem-calc(126);
+    padding: rem-calc(16 18);
+    white-space: nowrap;
+    min-width: auto;
+
+    @include media('<tablet') {
+      padding: rem-calc(18.4 20.7);
+    }
+  }
+
+  h4 {
+    display: block;
+    color: $yellow;
+    font-size: rem-calc(42);
+  }
+
+  .block-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @include media('>=desktop') {
+      align-items: flex-start;
+    }
+  }
+
+  .buttons-list {
+    list-style: none;
+    padding: 0;
+    margin: rem-calc(0 0 5);
+    display: grid;
+    gap: rem-calc(6);
+    grid-template-columns: repeat(2, 1fr);
+
+    @include media('>=tablet') {
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem-calc(10);
+    }
+
+    .btn {
+      width: 100%;
+
+      @include media('<desktop') {
+        font-size: rem-calc(16);
+        border-radius: rem-calc(12);
+      }
+
+      @include media('<tablet') {
+        font-size: rem-calc(18.4);
+        border-radius: rem-calc(13.8);
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+
+}

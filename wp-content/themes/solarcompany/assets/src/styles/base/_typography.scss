@@ -1,0 +1,126 @@
+// Typography
+
+@include title-size('≥');
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+.h {
+  font-family: $headings-font-family;
+  color: $headings-color;
+  font-weight: 600;
+  margin: 0 0 rem-calc(10);
+
+  @include media('≥tablet') {
+    margin-bottom: rem-calc(20);
+  }
+}
+
+
+p {
+  margin: 0 0 rem-calc(20);
+
+  @include media('>=desktop') {
+    margin: 0 0 rem-calc(40);
+  }
+}
+
+a {
+  @include animate(color);
+  color: $base-link-color;
+  text-decoration: $text-decoration;
+
+  &:hover,
+  &:focus {
+    color: $base-link-hover-color;
+    text-decoration: $text-decoration-hover;
+  }
+}
+
+a[href*="mailto:"] {
+  word-wrap: break-word;
+}
+
+h1,
+.h1 {
+  line-height: 1.1;
+  font-size: rem-calc(52);
+
+  @include media('>=tablet') {
+    font-size: rem-calc(60);
+  }
+
+  @include media('>=desktop') {
+    font-size: rem-calc(100);
+  }
+}
+
+h2,
+.h2 {
+  font-size: rem-calc(38);
+  line-height: calc(82/70);
+
+  @include media('>=tablet') {
+    font-size: rem-calc(50);
+  }
+
+  @include media('>=desktop') {
+    font-size: rem-calc(70);
+  }
+}
+
+h3,
+.h3 {
+  line-height: 1;
+  font-size: rem-calc(30);
+  margin: 0 0 rem-calc(12);
+
+  @include media('>=tablet') {
+    font-size: rem-calc(38);
+  }
+
+  @include media('>=desktop') {
+    font-size: rem-calc(42);
+    line-height: calc(48/42);
+    margin: 0 0 rem-calc(30);
+  }
+}
+
+h4,
+.h4 {
+  font-size: rem-calc(20);
+  line-height: 1.2;
+
+  @include media('>=desktop') {
+    font-size: rem-calc(24);
+  }
+}
+
+h5,
+.h5 {
+  font-size: rem-calc(18);
+  line-height: 1.2;
+
+  @include media('>=desktop') {
+    font-size: rem-calc(32);
+  }
+}
+
+h6,
+.h6 {
+  font-size: rem-calc(16);
+
+  @include media('>=desktop') {
+    font-size: rem-calc(24);
+    line-height: calc(26/24);
+  }
+}

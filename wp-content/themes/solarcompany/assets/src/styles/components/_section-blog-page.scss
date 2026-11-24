@@ -1,0 +1,36 @@
+.section-blog-page {
+  .blog-list {
+    @extend %listreset;
+    display: grid;
+    margin: rem-calc(0 0 30);
+    gap: rem-calc(24 20);
+
+    @include media('>=tablet') {
+      margin: rem-calc(0 0 50);
+      grid-template-columns: repeat(2, 1fr)
+    }
+
+    @include media('>=desktop') {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin: rem-calc(0 0 140);
+    }
+
+    li {
+      display: flex;
+    }
+
+    .card-block {
+      @include media('>=desktop') {
+        padding: rem-calc(20 45 18);
+      }
+
+      .text-block {
+        p {
+          @include media('>=desktop') {
+            margin: rem-calc(0 0 25);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,277 @@
+// Colors
+// Color calculator - http://razorjam.github.io/sasscolourfunctioncalculator/
+// Color names - http://name-of-color.com/
+// Color system
+
+$white: #fff !default;
+$gray: #ddd !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e0e0e0 !default;
+$gray-300: #f7f7f7 !default;
+$gray-400: #f4f4f4;
+$gray-500: #939393;
+$gray-600: #6d6f71;
+$gray-700: #666666;
+$gray-800: #343a40 !default;
+$gray-900: #000E10;
+$black: #000;
+// Sampled from the header design screenshot — no explicit fill was exposed in the
+// extracted Figma node data (background lives on an ancestor frame), verify against brand hex.
+$header-dark: #1a1a1a;
+
+
+
+
+
+$grays: (
+  ) !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge(("100": $gray-100,
+      "200": $gray-200,
+      "300": $gray-300,
+      "400": $gray-400,
+      "500": $gray-500,
+      "600": $gray-600,
+      "700": $gray-700,
+      "800": $gray-800,
+      "900": $gray-900 ),
+    $grays
+);
+
+$blue: #008ece;
+$blue-medium: #97d2f2;
+$blue-light: #dbeff7;
+$blue-dark: #00364f;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #f45c0f;
+$orange-light: #fb7723;
+$yellow: #FFD400;
+$green: #00513b;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+
+
+$colors: (
+  ) !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$colors: map-merge(("blue": $blue,
+      "indigo": $indigo,
+      "purple": $purple,
+      "pink": $pink,
+      "red": $red,
+      "orange": $orange,
+      "yellow": $yellow,
+      "green": $green,
+      "teal": $teal,
+      "cyan": $cyan,
+      "white": $white,
+      "gray": $gray-600,
+      "gray-dark": $gray-800 ),
+    $colors
+);
+
+$primary: $blue !default;
+$secondary: $gray !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
+
+$theme-colors: (
+  ) !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(("primary": $primary,
+      "secondary": $secondary,
+      "success": $success,
+      "info": $info,
+      "warning": $warning,
+      "danger": $danger,
+      "light": $light,
+      "dark": $dark ),
+    $theme-colors
+);
+
+// fonts name
+$base-font-sans-serif: 'Inter', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+$manrope-font-sans-serif: 'Manrope', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+$base-font-serif: 'Times New Roman', 'Times', 'Baskerville', 'Georgia', serif;
+
+$base-font: $base-font-sans-serif;
+$rem-base: 16px;
+
+// Body
+$base-text-color: $blue-dark;
+$base-background-body: $white;
+$base-background-footer: $orange;
+$font-size-base: rem-calc(22);
+$font-size-sm: rem-calc(16);
+$line-height-base: calc(34/22);
+$base-font-family: $base-font !default;
+$base-min-width: rem-calc(320);
+
+// base variables
+$base-radius: 0;
+$base-radius-small: 0;
+
+// container settings
+$max-width-center-container: 91.6%;
+$gutter: rem-calc(15);
+$padding-container: 0 $gutter;
+
+$unit-intervals: (
+  'px': 0.02,
+  'em': 0.01,
+  'rem': 0.1,
+  '': 0
+);
+
+// grid sistem
+$grid: (
+  ph: 'phone',
+  sm: 'tablet',
+  md: 'desktop'
+);
+
+// font weight
+$thin: 100;
+$light-font: 300;
+$normal: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+$extra: 800;
+$black-font: 900;
+
+// default margins
+$vertical-rhythm: $font-size-base;
+$widget-margin: rem-calc(20);
+
+// Liks
+$base-link-color: $black;
+$base-link-hover-color: $black;
+$text-decoration: none;
+$text-decoration-hover: underline;
+
+// Headers size
+$title-palette: (
+  // mobile: ('h1': 20,
+  //     'h2': 16,
+  //     'h3': 15,
+  //     'h4': 14,
+  //     'h5': 14,
+  //     'h6': 14),
+  // tablet: ('h1': 40,
+  //     'h2': 30,
+  //     'h3': 28,
+  //     'h4': 20,
+  //     'h5': 18,
+  //     'h6': 16),
+  // desktop: ('h1': 40,
+  //     'h2': 30,
+  //     'h3': 28,
+  //     'h4': 20,
+  //     'h5': 18,
+  //     'h6': 16),
+  // widescreen: ('h1': 40,
+  //     'h2': 30,
+  //     'h3': 28,
+  //     'h4': 20,
+  //     'h5': 18,
+  //     'h6': 16)
+);
+
+// headings style
+$headings-font-family: $manrope-font-sans-serif;
+$headings-color: $blue-dark;
+
+// Buttons
+$btn-border-width: rem-calc(1);
+$btn-border-radius: rem-calc(54);
+$btn-border-radius-sm: calc($btn-border-radius / 2) !default;
+$btn-border-radius-lg: calc($btn-border-radius * 2) !default;
+$btn-padding: rem-calc(11 25 11 9);
+$btn-padding-sm: rem-calc(5 10) !default;
+$btn-padding-lg: rem-calc(20 40) !default;
+$btn-font-size: rem-calc(22);
+$btn-font-size-sm: rem-calc(12) !default;
+$btn-font-size-lg: rem-calc(18) !default;
+$btn-line-height: $btn-font-size + 2;
+$btn-line-height-sm: $btn-font-size-sm + 2;
+$btn-line-height-lg: $btn-font-size-lg + 2;
+
+// btn default
+$btn-color-default: $black;
+$btn-background-default: $white;
+$btn-border-color-default: $btn-background-default !default;
+
+// hover
+$btn-hover-color-default: $btn-background-default !default;
+$btn-hover-background-default: $btn-color-default !default;
+$btn-hover-border-color-default: $btn-background-default !default;
+
+// btn primary
+$btn-color-primary: $white !default;
+$btn-background-primary: $primary !default;
+$btn-border-color-primary: $primary !default;
+// hover
+$btn-hover-color-primary: $white !default;
+$btn-hover-background-primary: darken($primary, 10%) !default;
+$btn-hover-border-color-primary: $btn-hover-background-primary !default;
+
+// btn secondary
+$btn-color-secondary: $white !default;
+$btn-background-secondary: $secondary !default;
+$btn-border-color-secondary: $secondary !default;
+// hover
+$btn-hover-color-secondary: $white !default;
+$btn-hover-background-secondary: darken($secondary, 10%) !default;
+$btn-hover-border-color-secondary: $secondary !default;
+
+// Forms
+$input-font-size: rem-calc(18); // font size for forms elements
+$input-line-height: $input-font-size + 2; // line height for forms elements
+$input-font-family: $base-font;
+$input-padding-vertical: rem-calc(10) !default; // padding for forms elements
+$input-padding-horizontal: 0; // padding for forms elements
+$input-padding: $input-padding-vertical $input-padding-horizontal !default;
+$input-border-width: 1px !default; // border input's width
+$input-border: $input-border-width solid $gray-600; // border for forms elements
+$input-border-radius: 0; // border radius for forms elements
+// $inpH: rem-calc(40px);
+$input-height: rem-calc(40); // height for forms elements
+//submit
+$submit-background: $btn-background-default;
+$submit-color: $btn-color-default;
+$submit-height: rem-calc(54);
+$submit-border-width: $btn-border-width;
+$submit-border-style: solid;
+$submit-border-color: $btn-border-color-default;
+$submit-padding: $btn-padding;
+$submit-font-size: $input-font-size;
+$submit-line-height: $btn-line-height;
+$submit-radius: $btn-border-radius;
+// submit hover
+$submit-hover-background: $submit-color; // submit background hover
+$submit-hover-color: $submit-background; // submit color hover
+$submit-hover-border-color: $submit-background; // submit color hover
+
+//focus
+$input-focus-border-color: $white; // border color for forms elements
+//placeholder
+$placeholder-color: $blue;
+// select
+$select-height: $input-height;
+$select-border: $input-border;
+$select-border-radius: $input-border-radius;
+$select-padding: $input-padding;
+$select-font-size: $input-font-size;
+$select-line-height: $input-line-height;
+
+// animation speed
+$animation-speed: 0.3s;

@@ -1,0 +1,225 @@
+// forms
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+
+label {
+  font-weight: normal;
+  font-size: rem-calc(18);
+  font-weight: 600;
+
+  @include media('>=desktop') {
+    font-size: rem-calc(22);
+  }
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+// input[type="search"] {
+//   -webkit-appearance: textfield;
+// }
+
+textarea {
+  resize: vertical;
+  vertical-align: top;
+  overflow: auto;
+  // height: rem-calc(42) !important;
+  resize: none;
+  line-height: rem-calc(19);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  // border: 1px solid transparent;
+  // -webkit-text-fill-color: transparent;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.acf-input {
+  input {
+    height: unset !important;
+  }
+}
+
+.form-block {
+  .nf-form-fields-required {
+    display: none !important;
+  }
+
+  .nf-field-container {
+    margin-bottom: 0;
+  }
+
+  .checkbox-container {
+    .checkbox-wrap {
+      flex-wrap: wrap;
+
+      label {
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    .nf-field-description {
+      line-height: 1.2;
+    }
+  }
+
+  .nf-field-element {
+
+    input[type='text'],
+    input[type='tel'],
+    input[type='email'],
+    input[type='search'],
+    input[type='password'],
+    input[type='url'],
+    // input[type='date'],
+    textarea {
+      -webkit-appearance: none;
+      -webkit-border-radius: 0;
+      // border: 1px solid $green-700;
+      border-radius: rem-calc(12);
+      height: rem-calc(62);
+      // color: $green-700;
+      font-weight: 300;
+      // outline-color: $green-700;
+      font-size: rem-calc(18);
+      padding: rem-calc(10 15);
+
+      @include media('>=desktop') {
+        padding: rem-calc(10 28);
+      }
+
+      @include placeholder {
+        // color: $green-700;
+      }
+
+      .nf-error & {
+        border-color: $red;
+      }
+    }
+
+    select {
+      // border: 1px solid $green-700;
+      border-radius: rem-calc(12);
+      height: rem-calc(60);
+      font-size: rem-calc(18);
+      font-weight: 300;
+      // color: $green-700;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 19.4 10.2'%3E%3Cpath fill='%23205a41' d='M9.7 10.2c-.1 0-.3 0-.4-.1L.1.9C0 .7 0 .3.1.1s.6-.1.8 0l8.8 8.8L18.5.1c.2-.2.5-.2.7 0s.2.5 0 .7L10 10s-.2.1-.4.1Z'/%3E%3C/svg%3E");
+      background-size: rem-calc(18);
+      background-position: calc(100% - rem-calc(22)) 50%;
+      background-repeat: no-repeat;
+      -webkit-appearance: none;
+      appearance: none;
+      padding: rem-calc(10 30 10 15);
+      // outline-color: $green-700;
+
+      @include media('>=desktop') {
+        padding: rem-calc(10 45 10 28);
+      }
+
+      .nf-error & {
+        border-color: $red;
+      }
+    }
+
+    textarea {
+      height: rem-calc(250);
+    }
+  }
+}
+
+.nf-form-cont {
+
+  .nf-input-limit,
+  .nf-field-label {
+    display: none;
+  }
+
+  .nf-error-required-error {
+    font-size: rem-calc(16);
+
+    @include media('>=desktop') {
+      font-size: rem-calc(18);
+    }
+  }
+
+  .submit-wrap {
+    .nf-field-element {
+      position: relative;
+      border-radius: rem-calc(50);
+      display: inline-flex;
+      width: auto;
+
+      &:hover {
+        color: $white;
+        text-decoration: none;
+
+        input[type="submit"] {
+          color: $white;
+        }
+      }
+
+      input[type="submit"] {
+        @include animate(color);
+        background: none;
+        border: 0;
+        padding: 0;
+        font-weight: 500;
+        color: $green;
+        padding: rem-calc(15);
+        min-width: rem-calc(156);
+        font-size: rem-calc(20);
+        line-height: 1;
+        cursor: pointer;
+      }
+    }
+  }
+
+  nf-fields-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem-calc(20);
+  }
+
+  nf-field {
+    width: 100%;
+
+    &:has(>*:not(.col-2):not(.col-3):not(.col-4)) {
+      flex: 1 1 100%;
+    }
+
+    &:has(>.col-2) {
+      @include media('>=tablet') {
+        flex: 1 1 calc(50% - rem-calc(10));
+      }
+    }
+
+    &:has(>.col-3) {
+      @include media('>=tablet') {
+        flex: 0 0 calc(33.333% - rem-calc(14));
+        max-width: calc(33.333% - rem-calc(14));
+      }
+    }
+
+    &:has(>.col-4) {
+      @include media('>=tablet') {
+        flex: 1 1 calc(25% - rem-calc(15));
+      }
+    }
+  }
+}

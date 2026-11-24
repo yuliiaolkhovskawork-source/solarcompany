@@ -1,0 +1,88 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.btn {
+  @include animate(color background box-shadow font-weight);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem-calc(13.8 6.9);
+  border: none;
+  border-radius: rem-calc(9.2);
+  background: $yellow;
+  font-family: $manrope-font-sans-serif;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: rem-calc(13.8);
+  line-height: 1;
+  color: $blue-dark;
+  z-index: 0;
+  min-width: rem-calc(105.8);
+
+  @include media('>=tablet') {
+    font-size: rem-calc(21);
+    padding: rem-calc(22 15);
+    min-width: rem-calc(166);
+    border-radius: rem-calc(16);
+  }
+
+  &.btn-outline {
+    @include animate(color background border-color box-shadow);
+    color: $blue;
+    border: 2px solid $blue;
+    min-width: rem-calc(107);
+    background: none;
+    padding: rem-calc(20 15);
+
+    @include media('<tablet') {
+      padding: rem-calc(23 17.25);
+      min-width: rem-calc(123.05);
+    }
+
+    &:hover {
+      color: $white;
+      background: $blue;
+    }
+  }
+
+  &:focus {
+    text-decoration: none;
+    color: $blue-dark;
+  }
+
+  &:hover {
+    text-decoration: none;
+    box-shadow: 3px 3px 6px rgba($black, 0.18);
+
+    .btn-text:before {
+      font-weight: 700;
+      opacity: 1;
+    }
+
+    .text {
+      opacity: 0;
+    }
+  }
+
+  .btn-text {
+    position: relative;
+
+    &:before {
+      content: attr(data-text);
+      @include animate(font-weight opacity);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      opacity: 0;
+    }
+
+    .text {
+      @include animate(opacity);
+    }
+  }
+}

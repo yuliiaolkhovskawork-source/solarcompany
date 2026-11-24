@@ -1,0 +1,162 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the common layout of the site
+// -----------------------------------------------------------------------------
+[id="wrapper"] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+[id="main"] {
+  flex-grow: 1;
+  overflow: hidden;
+  // display: flex;
+  // flex-wrap: wrap;
+}
+
+.container {
+  width: 100%;
+  max-width: 91%;
+  // padding: $padding-container;
+  margin: 0 auto;
+
+  @include media('>=tablet') {
+    max-width: $max-width-center-container
+  }
+
+  @include media('>=4k') {
+    max-width: rem-calc(2176);
+  }
+}
+
+.image {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/**
+ * [hidden] fallback for IE10 and lower
+ */
+[hidden] {
+  display: none;
+}
+
+[class*=section-] {
+  padding: rem-calc(50 0);
+}
+
+.resize-active {
+  * {
+    transition: none !important;
+  }
+}
+
+.main:has(:first-child.hero-section:not(.no-hero-image)),
+.main:has(:first-child.intro),
+.home .main:has(.hero-section.tile-block) {
+  margin-top: rem-calc(-82.5);
+
+  @include media('>=tablet') {
+    margin-top: rem-calc(-105);
+  }
+
+  @include media('>=desktop') {
+    margin-top: rem-calc(-162);
+  }
+}
+
+.main {
+  &:has(.single-post-wrap:has(.page-title)) {
+    @include media('>=desktop') {
+      margin-top: 0;
+    }
+  }
+}
+
+.navigation-single {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: rem-calc(20);
+  padding: rem-calc(25 0);
+
+  @include media('>=phone') {
+    justify-content: space-between;
+  }
+
+  a {
+    @include animate(color box-shadow font-weight);
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none;
+    color: $blue-dark;
+    line-height: 1;
+    min-width: 5.9375rem;
+    text-align: center;
+    background: $yellow;
+    border-radius: rem-calc(16);
+    padding: rem-calc(22 15);
+    font-family: $manrope-font-sans-serif;
+    font-weight: 500;
+
+    @include media('>=desktop') {
+      min-width: 8.125rem;
+    }
+
+    &:hover {
+      text-decoration: none;
+      box-shadow: 3px 3px 6px rgba($black, 0.18);
+      font-weight: 700;
+    }
+  }
+}
+
+.single-post-wrap {
+  padding: rem-calc(25 0);
+
+  @include media('>=tablet') {
+    padding: rem-calc(45 0);
+  }
+}
+
+.block-heading {
+  display: grid;
+  gap: rem-calc(20);
+
+  @include media('>=tablet') {
+    grid-template-columns: 1fr auto;
+    align-items: flex-end;
+  }
+
+  &:has(.text-area) {
+    @include media('>=tablet') {
+      grid-template-columns: 3.3fr 6.7fr;
+      align-items: flex-start;
+    }
+  }
+
+  &:has(.text-area > .btn:only-child) {
+    align-items: flex-end;
+  }
+
+  .text-area {
+    padding: rem-calc(10 0 0);
+    max-width: rem-calc(1020);
+  }
+
+  p {
+    @include media('>=desktop') {
+      margin: rem-calc(0 0 25);
+    }
+  }
+
+  h2,
+  .h2 {
+    margin: 0;
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "dev/solarcompany",
+    "description": "Wordpress theme",
+    "type": "wordpress-theme",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Yuliia Olkhovska",
+            "email": "yuliia.olkhovska.work@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0"
+    }
+}

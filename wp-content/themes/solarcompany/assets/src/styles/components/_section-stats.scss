@@ -1,0 +1,145 @@
+.section-statistics {
+  .holder-area {
+    background: $blue;
+    border-radius: rem-calc(16);
+    padding: rem-calc(30 20 20);
+    color: $white;
+
+    @include media('>=desktop') {
+      padding: rem-calc(55 70 75);
+    }
+  }
+
+  .text-area {
+    max-width: rem-calc(755);
+    margin: 0 auto;
+
+    p {
+      @include media('>=desktop') {
+        margin: rem-calc(0 0 50);
+      }
+    }
+  }
+
+  .text-block {
+    text-align: center;
+    max-width: rem-calc(1000);
+    margin: 0 auto;
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6,
+    .h {
+      color: $white;
+
+      @include media('>=desktop') {
+        margin: rem-calc(0 0 40);
+      }
+    }
+  }
+
+  .stats-list {
+    @extend %listreset;
+    border-radius: rem-calc(12);
+    overflow: hidden;
+    display: grid;
+
+    @include media('>=phone') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media('>=tablet') {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    li {
+      flex: 1;
+    }
+  }
+}
+
+.card-stats {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem-calc(20);
+  height: 100%;
+  min-height: rem-calc(250);
+
+  @include media('>=desktop') {
+    min-height: rem-calc(400);
+    padding: rem-calc(25);
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba($black, 0.47);
+    z-index: -1;
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -21;
+  }
+
+  .card-title,
+  .value-holder {
+    font-family: $manrope-font-sans-serif;
+    font-weight: 600;
+    display: block;
+  }
+
+  .card-title {
+    font-size: rem-calc(20);
+    margin: rem-calc(0 0 15);
+
+    @include media('>=desktop') {
+      font-size: rem-calc(28);
+    }
+  }
+
+  .value-holder {
+    color: $yellow;
+    font-size: rem-calc(40);
+
+    @include media('>=desktop') {
+      font-size: rem-calc(90);
+      margin: rem-calc(0 0 7);
+    }
+
+  }
+
+  p {
+    margin: rem-calc(0 0 20);
+
+    @include media('>=desktop') {
+      padding: rem-calc(0 25);
+    }
+  }
+
+  .stat-holder {
+    text-align: center;
+
+    @include media('>=desktop') {
+      font-size: rem-calc(18);
+      line-height: calc(24/18);
+    }
+  }
+}

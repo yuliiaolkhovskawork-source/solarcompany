@@ -1,0 +1,69 @@
+.section-services-block {
+
+  .holder-block {
+    display: grid;
+    gap: rem-calc(20);
+    padding: rem-calc(25 0 0);
+
+    @include media('>=tablet') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media('>=desktop') {
+      padding: rem-calc(55) 0 0;
+    }
+
+    &.three-columns {
+      @include media('>=tablet') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media('>=desktop') {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .card-block {
+        aspect-ratio: 573/335;
+      }
+    }
+
+    &.four-columns {
+      @include media('>=tablet') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media('>=desktop') {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .card-block {
+        @include media('>=desktop') {
+          padding: rem-calc(20 50 30 50);
+        }
+
+        .text-wrap {
+          padding: rem-calc(25);
+
+          @include media('>=desktop') {
+            padding: rem-calc(30 50);
+          }
+
+          .text-heading {
+            margin: rem-calc(0 0 12);
+          }
+
+          p {
+            @include media('>=desktop') {
+              margin: rem-calc(0 0 28);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .card-block {
+    aspect-ratio: 425/335;
+  }
+
+}

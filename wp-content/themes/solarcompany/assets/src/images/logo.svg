@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 65">
+  <defs>
+    <style>
+      .sc-ray   { fill: #FFD400; }
+      .sc-title { fill: #1E2D40; }
+      .sc-sub   { fill: #008ECE; }
+    </style>
+  </defs>
+
+  <!-- Sun icon, center (32.5, 32.5) -->
+  <circle cx="32.5" cy="32.5" r="9" class="sc-ray"/>
+  <g transform="translate(32.5,32.5)">
+    <polygon points="0,-22 -2,-9 2,-9"             class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(45)"  class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(90)"  class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(135)" class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(180)" class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(225)" class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(270)" class="sc-ray"/>
+    <polygon points="0,-22 -2,-9 2,-9" transform="rotate(315)" class="sc-ray"/>
+  </g>
+
+  <!-- Separator -->
+  <line x1="63" y1="15" x2="63" y2="50" stroke="#008ECE" stroke-width="1" stroke-opacity="0.35"/>
+
+  <!-- "Solar" -->
+  <text x="71" y="36"
+        font-family="Manrope,'Plus Jakarta Sans',Inter,sans-serif"
+        font-size="21" font-weight="700" letter-spacing="0.3"
+        class="sc-title">Solar</text>
+
+  <!-- "COMPANY" -->
+  <text x="72" y="50"
+        font-family="Manrope,'Plus Jakarta Sans',Inter,sans-serif"
+        font-size="8.5" font-weight="600" letter-spacing="3"
+        class="sc-sub">COMPANY</text>
+</svg>

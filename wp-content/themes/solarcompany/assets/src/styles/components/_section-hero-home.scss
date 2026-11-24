@@ -1,0 +1,322 @@
+.section-hero-home {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+
+  @include media('>=desktop') {
+    padding: 0;
+  }
+
+  &.empty-hero-section {
+    min-height: auto;
+    padding: 0;
+    display: none;
+  }
+
+  &.no-hero-image {
+    .holder-block {
+      min-height: auto;
+      padding: rem-calc(0 0 50);
+    }
+
+    .text-block {
+      text-align: center;
+      margin: 0 auto;
+      color: $blue-dark;
+
+      h1,
+      .h1,
+      h2,
+      .h2 {
+        color: $blue-dark;
+      }
+    }
+
+    &.tile-block {
+      .holder-block {
+        .home & {
+          padding: rem-calc(65 0 50);
+
+          @include media('>=desktop') {
+            padding: rem-calc(130 0 60);
+          }
+        }
+      }
+    }
+  }
+
+  &.tile-block {
+    &:has(.hero-slider, .bg-video, .bg-image) {
+      .text-block {
+        color: $white;
+
+        h1,
+        .h1,
+        h2,
+        .h2 {
+          color: $white;
+        }
+      }
+    }
+
+    .holder-block {
+      .home & {
+        min-height: auto;
+
+        @include media('>=desktop') {
+          padding: rem-calc(130 0 65);
+        }
+      }
+    }
+
+    .text-block {
+      color: $blue-dark;
+      margin: 0 auto;
+      text-align: center;
+
+      h1,
+      .h1,
+      h2,
+      .h2 {
+        color: $blue;
+
+        @include media('<tablet') {
+          margin: rem-calc(0 0 10);
+        }
+      }
+    }
+
+    .tile-list {
+      @extend %listreset;
+      display: grid;
+      gap: rem-calc(10);
+      margin: rem-calc(40 0 0);
+
+      @include media('>=phone') {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-radius: rem-calc(16);
+        overflow: hidden;
+        gap: 0;
+
+        // Fewer than 4 tiles: stretch them evenly across the full width.
+        &:not(:has(> li:nth-child(4))) {
+          grid-template-columns: none;
+          grid-auto-flow: column;
+          grid-auto-columns: minmax(0, 1fr);
+        }
+
+      }
+
+      @include media('>=desktop') {
+        margin: rem-calc(75 0 0);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      li {
+        max-height: rem-calc(420);
+
+        @include media('<phone') {
+          border-radius: rem-calc(16);
+          overflow: hidden;
+        }
+
+        // Stacked tiles enter the viewport one by one, so the stagger delay is desktop-only.
+        // &[data-aos] {
+        //   @include media('<phone') {
+        //     transition-delay: 0s;
+        //   }
+        // }
+      }
+    }
+  }
+
+  .bg-video,
+  .bg-image {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba($black, 0.4);
+    }
+  }
+
+  .bg-image {
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .bg-video {
+    .poster {
+      display: none !important;
+    }
+
+    video {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .text-area {
+    max-width: rem-calc(900);
+    margin: 0 auto;
+
+    @include media('>=desktop') {
+      font-size: rem-calc(24);
+      line-height: calc(38/24);
+    }
+
+    p {
+      margin: rem-calc(0 0 15);
+
+      @include media('>=desktop') {
+        margin: rem-calc(0 0 25);
+      }
+    }
+  }
+
+  .text-block {
+    color: $white;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: rem-calc(1080);
+    margin: 0 auto;
+    text-align: center;
+    padding: rem-calc(25 0 0);
+
+    .blog & {
+      @include media('>=desktop') {
+        max-width: none;
+      }
+    }
+
+    h1,
+    .h1,
+    h2,
+    .h2 {
+      margin: rem-calc(0 0 20);
+      color: $white;
+    }
+  }
+
+  .holder-block {
+    display: flex;
+    align-items: flex-end;
+    min-height: 70vh;
+    padding: rem-calc(120 0 40);
+
+    @include media('>=tablet') {
+      position: relative;
+      overflow: hidden;
+    }
+
+    @include media('>=desktop') {
+      padding: rem-calc(145 0 65);
+    }
+
+    .home & {
+      min-height: 100vh;
+    }
+  }
+
+  .hero-slider {
+    .holder-block {
+      box-sizing: border-box;
+      height: 100%;
+      min-height: 70vh;
+
+      .home & {
+        min-height: 100vh;
+      }
+    }
+
+    .swiper-slide {
+      height: auto;
+    }
+
+    .slider-nav {
+      display: flex;
+      position: absolute;
+      z-index: 5;
+      gap: rem-calc(15);
+      bottom: rem-calc(15);
+      left: 7.5%;
+      display: none;
+
+      @include media('>=tablet') {
+        bottom: rem-calc(80);
+        right: 7.5%;
+        left: auto;
+      }
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        width: rem-calc(35) !important;
+        height: rem-calc(35) !important;
+        border-radius: 50%;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        right: auto;
+        top: auto;
+        left: auto;
+        background: $black;
+
+        @include media('>=tablet') {
+          width: rem-calc(50) !important;
+          height: rem-calc(50) !important;
+        }
+
+        &:after {
+          @include animate(color);
+          font-size: rem-calc(20);
+          color: $white;
+
+          @include media('>=tablet') {
+            font-size: rem-calc(26);
+          }
+        }
+
+        &:hover {
+          background: $white;
+
+          &:after {
+            color: $black;
+          }
+        }
+
+        svg {
+          display: none;
+        }
+      }
+    }
+  }
+
+  iframe {
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+  }
+}

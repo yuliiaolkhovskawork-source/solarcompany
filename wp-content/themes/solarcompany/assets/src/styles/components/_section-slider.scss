@@ -1,0 +1,281 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the slider section component.
+// -----------------------------------------------------------------------------
+.section-slider {
+  padding: rem-calc(60 0);
+
+  @include media('>=desktop') {
+    padding: rem-calc(80 0);
+  }
+
+  &.dark-gray-theme {
+    .block-holder {
+      background: $blue-dark;
+    }
+
+    .text-holder {
+      color: $white;
+    }
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6,
+    .h {
+      color: $white;
+    }
+  }
+
+  .card {
+    width: auto;
+  }
+
+  .block-holder {
+    position: relative;
+    overflow: hidden;
+    border-radius: rem-calc(16);
+    background: $blue-light;
+    padding: rem-calc(40 0 40 20);
+
+    @include media('>=tablet') {
+      display: flex;
+      // align-items: flex-end;
+      gap: rem-calc(40);
+      padding: rem-calc(50 0 50 40);
+    }
+
+    @include media('>=desktop') {
+      gap: rem-calc(60);
+      padding: rem-calc(55 0 55 65);
+    }
+  }
+
+  .text-area {
+    padding: rem-calc(0 20 30 0);
+
+    @include media('>=tablet') {
+      flex: 0 0 38%;
+      max-width: rem-calc(620);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .text-holder {
+    display: block;
+    color: $blue-dark;
+
+    @include media('>=tablet') {
+      margin: auto 0;
+    }
+
+    h2,
+    .h2 {
+      margin: rem-calc(0 0 20);
+
+      @include media('>=desktop') {
+        margin: rem-calc(0 0 40);
+      }
+    }
+  }
+
+  .text-box {
+    @include media('>=desktop') {
+      font-size: rem-calc(20);
+      line-height: calc(34 / 20);
+    }
+
+    p {
+      margin: rem-calc(0 0 25);
+
+      @include media('>=desktop') {
+        margin: rem-calc(0 0 40);
+      }
+    }
+  }
+
+  .post-slider {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+
+    @include media('>=desktop') {
+      padding: rem-calc(60 0);
+    }
+  }
+
+  .slider-hover-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 50px;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+  }
+
+  .swiper-slide {
+    width: rem-calc(280);
+    height: auto;
+    display: flex;
+
+    @include media('>=phone') {
+      width: rem-calc(340);
+    }
+
+    @include media('>=desktop') {
+      width: rem-calc(425);
+    }
+
+    >li {
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card-block {
+      box-sizing: border-box;
+    }
+  }
+
+  .slider-nav {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: rem-calc(12);
+    overflow: visible;
+    border-radius: 0;
+    transform: none;
+    margin: rem-calc(0 0 25);
+
+    @include media('>=desktop') {
+      margin: rem-calc(0 0 22);
+    }
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    @include animate(background box-shadow);
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem-calc(30);
+    height: rem-calc(30);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: rem-calc(8);
+    background: $blue;
+    color: $white;
+    cursor: pointer;
+
+    @include media('>=tablet') {
+      border-radius: rem-calc(16);
+      width: rem-calc(52);
+      height: rem-calc(52);
+    }
+
+    &:after {
+      display: none;
+    }
+
+    svg {
+      width: rem-calc(10);
+      height: rem-calc(14);
+
+      @include media('>=tablet') {
+        width: rem-calc(20);
+        height: rem-calc(24);
+      }
+    }
+
+    &:hover {
+      background: $yellow;
+      box-shadow: 3px 3px 6px rgba($black, 0.18);
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+.slider-nav {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  border-radius: rem-calc(50);
+  position: relative;
+  overflow: hidden;
+  display: none;
+  margin: rem-calc(0 0 25);
+
+  @include media('<tablet') {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @include animate(background);
+  position: relative;
+  margin-top: 0;
+  background: transparent;
+  cursor: pointer;
+  border: 0;
+  left: auto;
+  right: auto;
+  height: auto;
+  width: auto;
+  top: auto;
+  bottom: auto;
+  padding: rem-calc(10 20);
+
+  @include media('>=desktop') {
+    padding: rem-calc(14 24);
+  }
+
+  svg {
+    width: rem-calc(14);
+    height: rem-calc(22);
+
+    path {
+      @include animate(fill);
+    }
+  }
+
+  &:hover {
+    &:before {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    svg {
+      path {
+        fill: $white;
+      }
+    }
+  }
+}
